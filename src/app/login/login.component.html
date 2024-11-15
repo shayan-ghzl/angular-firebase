@@ -1,0 +1,44 @@
+<section>
+    <div>
+        <h3>Login</h3>
+
+        <form [formGroup]="formGroup" (ngSubmit)="submit()">
+
+            <mat-form-field subscriptSizing="dynamic" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input type="text" matInput formControlName="email">
+            </mat-form-field>
+
+            <mat-form-field subscriptSizing="dynamic" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input type="text" matInput formControlName="password">
+            </mat-form-field>
+
+            <button type="submit" mat-flat-button color="primary" [disabled]="formGroup.disabled || formGroup.invalid || formGroup.pristine">Login</button>
+        </form>
+    </div>
+    
+    <div>
+        <h3>Register</h3>
+
+        <form [formGroup]="formGroup_register" (ngSubmit)="submit_register()">
+
+            <mat-form-field subscriptSizing="dynamic" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input type="text" matInput formControlName="email">
+            </mat-form-field>
+
+            <mat-form-field subscriptSizing="dynamic" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input type="text" matInput formControlName="password">
+            </mat-form-field>
+
+            <mat-form-field subscriptSizing="dynamic" appearance="outline">
+                <mat-label>Username</mat-label>
+                <input type="text" matInput formControlName="username">
+            </mat-form-field>
+
+            <button type="submit" mat-flat-button color="primary" [disabled]="formGroup_register.disabled || formGroup_register.invalid || formGroup_register.pristine">Register</button>
+        </form>
+    </div>
+</section>
