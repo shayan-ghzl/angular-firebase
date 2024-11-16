@@ -23,7 +23,7 @@ export class FirestoreService {
     idField: 'id'
   }) as Observable<Friend[]>;
 
-  addFriend(friend: Friend) {
+  addFriend(friend: Omit<Friend, 'id'>) {
     friend = trimStringValues(friend);
     const promise = addDoc(this.friendsCollection, friend)
       .then(response => response.id)
@@ -37,7 +37,7 @@ export class FirestoreService {
     return from(promise);
   }
 
-  updateFriend(id: string, friend: Friend) {
+  updateFriend(id: string, friend: Omit<Friend, 'id'>) {
     friend = trimStringValues(friend);
     const docRef = doc(this.firestore, 'friends/' + id);
     const promise = setDoc(docRef, friend).catch((error: FirestoreError) => error);

@@ -20,14 +20,14 @@ export class FireauthService {
   // it will not throw any errors, null means not logged-in
   currentUser$ = user(this.fireauth) as Observable<User | null>;
 
-  login(user: IUser) {
+  login(user: Omit<IUser, 'id'>) {
     user = trimStringValues(user);
     const promise = signInWithEmailAndPassword(this.fireauth, user.email, user.password)
       .catch((error: FirebaseError) => error);
     return from(promise);
   }
 
-  register(user: IUser) {
+  register(user: Omit<IUser, 'id'>) {
     user = trimStringValues(user);
     const promise = createUserWithEmailAndPassword(this.fireauth, user.email, user.password)
       .then(response => updateProfile(response.user, { displayName: user.username }).catch((error: FirebaseError) => { throw error; }))
