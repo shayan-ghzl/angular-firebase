@@ -1,16 +1,8 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-login',
-    standalone: true,
-    imports: [
-        ReactiveFormsModule,
-        MatInputModule,
-        MatButtonModule,
-    ],
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss'
 })

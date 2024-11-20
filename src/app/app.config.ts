@@ -1,19 +1,17 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { getDatabase, provideDatabase } from '@angular/fire/database';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideRouter } from '@angular/router';
-
-import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { NgModule } from '@angular/core';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { AppComponent } from './app.component';
 import { routes } from './app.routes';
-
-const DATABASE_SHARD_URLS = [
-  'https://ssrtest-cebd9.firebaseio.com',
-  "https://ssrtest-logs.firebaseio.com/",
-  "https://ssrtest-inits.firebaseio.com/",
-];
-
-// const appName = '[DEFAULT]';
-const appName = 'APPLICATION_NAME';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 
 const glo3d_config = {
   apiKey: "AIzaSyCRJJCgjBONQt9l7BnITY90FY1fb8N0-QU",
@@ -35,19 +33,25 @@ const my_config = {
   messagingSenderId: "940644286738"
 };
 
-export const appConfig: ApplicationConfig = {
-  providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
-    provideAnimationsAsync(),
-    // needed in any firebase application
-    provideFirebaseApp(() => initializeApp(my_config, appName)),
-    // needed when you need realtime databse
-    // provideDatabase(() => getDatabase()),
-    provideDatabase(() => getDatabase(getApp(appName))),
-    // provideDatabase(injector => getDatabase(getApp(appName), DATABASE_SHARD_URLS[0])),
-    // provideDatabase(injector => getDatabase(injector.get(FirebaseApp), DATABASE_SHARD_URLS[0])),
-    // provideDatabase(injector => getDatabase(injector.get(FirebaseApp), DATABASE_SHARD_URLS[1])),
-    // provideDatabase(injector => getDatabase(injector.get(FirebaseApp), DATABASE_SHARD_URLS[2])),
-  ]
-};
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    LoginComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(my_config),
+    AngularFireDatabaseModule,
+    RouterModule.forRoot(routes),
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
+  bootstrap: [AppComponent],
+})
+export class AppModule {
+}
