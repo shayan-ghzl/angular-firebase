@@ -16,19 +16,4 @@
             <button type="submit" mat-flat-button color="primary" [disabled]="formGroup.invalid || formGroup.pristine">Add New a Friend</button>
         </form>
     </div>
-
-    <div>
-        <h3>Friends List</h3>
-        @for (friend of (friends$ | async); track friend.id) {
-            <div class="row-span">
-                <pre>{{friend | json}}</pre>
-                <button type="button" mat-icon-button (click)="removeFriend(friend.id)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </div>
-        }
-        @empty {
-            Loading...
-        }
-    </div>
 </section>

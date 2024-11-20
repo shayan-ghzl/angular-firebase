@@ -3,14 +3,13 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideRouter } from '@angular/router';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAuth, provideAuth } from '@angular/fire/auth';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideAnimationsAsync(),
     // needed in any firebase application
     provideFirebaseApp(() => initializeApp({
       "projectId": "first-firebase-project-904e5",
@@ -20,10 +19,5 @@ export const appConfig: ApplicationConfig = {
       "authDomain": "first-firebase-project-904e5.firebaseapp.com",
       "messagingSenderId": "940644286738"
     })),
-    // needed when you need firestore
-    provideFirestore(() => getFirestore()),
-    // needed when you need firebase authentication
-    provideAuth(() => getAuth()),
-    provideAnimationsAsync(),
   ]
 };

@@ -1,12 +1,6 @@
 <nav>
     <a routerLink="/home">Home</a>
-    @if (currentUser) {
-        <button type="button" mat-flat-button color="accent" (click)="logout()">Logout</button>
-        {{currentUser.providerData[0].email}}
-        <!-- {{currentUser.providerData | json}} -->
-    } @else {
-        <a routerLink="/login">Login</a>
-    }
+    <a routerLink="/login">Login</a>
 </nav>
 
 <router-outlet />
