@@ -9,6 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class HomeComponent {
 
+    // also named as db
     private angularFireDatabase = inject(AngularFireDatabase);
 
     formGroup = new FormGroup({
@@ -17,9 +18,43 @@ export class HomeComponent {
     });
 
     ngOnInit(): void {
-        this.angularFireDatabase.list('/friends').valueChanges().subscribe(response => {
+        // // listen for changes
+        // // it returns an array
+        // this.angularFireDatabase.list('/friends').valueChanges().subscribe(response => {
+        //     debugger;
+        // });
+        // // listen for changes
+        // // it returns an object
+        // this.angularFireDatabase.object('/friends').valueChanges().subscribe(response => {
+        //     debugger;
+        // });
+        // // listen for changes
+        // // it returns an object
+        // this.angularFireDatabase.object('/friends').snapshotChanges().subscribe(response => {
+        //     console.log(response.payload.val());
+
+        //     debugger;
+        // });
+
+        // it will logs all changes
+        this.angularFireDatabase.list('/friends').auditTrail().subscribe(trail => {
+            console.log(trail);
             debugger;
         });
+
+        this.angularFireDatabase.list('/friends', ref => ref.orderByChild('family').equalTo('ghazali')).valueChanges().subscribe(response => {
+            debugger;
+        });
+
+        const ref = this.angularFireDatabase.database.ref('friends');
+        ref.once('value').then(snapshot => {
+            console.log(snapshot.val());
+            debugger
+        });
+
+        // generates a new random id
+        console.log(this.angularFireDatabase.createPushId());
+
     }
 
     addFriend(): void {
